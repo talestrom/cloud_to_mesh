@@ -1,0 +1,24 @@
+<launch>
+<param name="/use_sim_time" value="true"/>
+
+<node pkg = "rqt_console" type = "rqt_console" name = "rqt_console">
+</node>
+
+<node pkg="rviz" name="rviz" type="rviz">
+</node>
+
+<node pkg="rosbag" name="bagfiles" type="play" args="--clock -r 0.5 -l /home/robot/catkin_ws/src/bagfiles/2014-04-25-11-04-58.bag" >
+</node>
+
+<node pkg="cloud_to_mesh" name="point_cloud_to_mesh" 
+        type="cloud_to_mesh" respawn = "true">    
+<param name = "method" type = "string" value = "poisson_projection" />       
+<param name = "filter_leafsize" type = "double" value = "0.1" />
+<param name = "max_area" type = "double" value = "1.0" /> 
+<param name = "edge_angle" type = "double" value = "9" />       
+<param name = "normal_angle" type="double" value="90" />
+<!-- Max distance of a new point to original points. -->
+<param name ="poisson_distance" type = "double" value = "0.1" />
+</node>
+
+</launch>
